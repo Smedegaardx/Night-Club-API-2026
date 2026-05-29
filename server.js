@@ -1,5 +1,4 @@
 const path = require("path");
-const express = require("express");
 const jsonServer = require("json-server");
 const sendError = require("./utils/send-error");
 const createValidationMiddleware = require("./middleware/validation");
@@ -26,31 +25,28 @@ function isDuplicateIdError(error) {
 }
 
 const middlewares = jsonServer.defaults({
-  static: false,
+  static: publicDir,
 });
 
-app.use(
-  "/file-bucket",
-  express.static(path.join(publicDir, "file-bucket"), {
-    setHeaders: (res, filePath) => {
-      if (filePath.endsWith(".jpg") || filePath.endsWith(".jpeg")) {
-        res.setHeader("Content-Type", "image/jpeg");
-      }
+app.use("/file-bucket", (req, res, next) => {
+  if (req.path.match(/\.(jpg|jpeg)$/i)) {
+    res.setHeader("Content-Type", "image/jpeg");
+  }
 
-      if (filePath.endsWith(".png")) {
-        res.setHeader("Content-Type", "image/png");
-      }
+  if (req.path.match(/\.png$/i)) {
+    res.setHeader("Content-Type", "image/png");
+  }
 
-      if (filePath.endsWith(".webp")) {
-        res.setHeader("Content-Type", "image/webp");
-      }
+  if (req.path.match(/\.webp$/i)) {
+    res.setHeader("Content-Type", "image/webp");
+  }
 
-      if (filePath.endsWith(".svg")) {
-        res.setHeader("Content-Type", "image/svg+xml");
-      }
-    },
-  }),
-);
+  if (req.path.match(/\.svg$/i)) {
+    res.setHeader("Content-Type", "image/svg+xml");
+  }
+
+  next();
+});
 
 app.use(middlewares);
 
