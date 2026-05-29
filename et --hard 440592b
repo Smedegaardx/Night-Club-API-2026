@@ -1,0 +1,38 @@
+[33m300ac16[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Fix image headers
+[33m8b8fae5[m Fix image content type headers
+[33m79e3e56[m test
+[33m0e22dae[m Attempted to fix API with help from ChatGPT
+[33m440592b[m docs: remove outdated local development instructions and health endpoint from README
+[33m9ddb87f[m docs: standardize section headings for consistency in technical documentation
+[33m45b7bff[m docs: translate testimonials to English for broader accessibility
+[33m0a45bc8[m docs: enhance asset metadata in event and testimonial objects for improved accessibility
+[33m50df75c[m docs: clarify data fetching guidelines for Next.js to enhance server-side implementation
+[33m04b5df6[m docs: update guidelines for data fetching in Next.js to ensure proper server-side implementation
+[33m008b74c[m Merge pull request #3 from TroelsAtWork/main
+[33m57832b8[m Update OPGAVEBESKRIVELSE.md
+[33m41c9bf7[m Enhance frontend validation and error handling details
+[33m22794e6[m docs: update guidelines for using Next.js with local API image handling
+[33mc2951c4[m fix: clarify guidelines for design adjustments to enhance UI consistency and usability
+[33m04ec210[m fix: standardize error responses for newsletter subscriptions and improve validation error handling
+[33m199ea31[m feat: add requirement for clear focus states on interactive elements for accessibility
+[33mbfcfbd2[m fix: update BASE_URL to base_url in insomnia.json for consistency
+[33mc57a109[m Implement feature X to enhance user experience and fix bug Y in module Z
+[33mdd17181[m fix: remove duplicate reservation entries from database
+[33m7f605dc[m fix: streamline event lineup formatting and update isFeatured status
+[33me5076d2[m feat: update README and package.json by removing backup-db script and clarifying seed-data requirements
+[33m14da9ac[m Merge pull request #2 from daviatkea:events
+[33m89fbbfc[m Merge pull request #1 from daviatkea:event-override-comments
+[33mfde0ef8[m feat: add reservations endpoints and update Insomnia requests for event-based table reservations
+[33ma7dd1d4[m feat: update deployment instructions and add Next.js integration details
+[33m6529f04[m feat: implement event comments functionality and update related endpoints
+[33me5c353f[m Refactor code structure for improved readability and maintainability
+[33m6f32bfe[m feat: update reservation dates and associate events in db_backup.json
+[33m599c28e[m Refactor code structure for improved readability and maintainability
+[33m3a1f884[m feat: add new reservations and newsletters entries to db_backup.json
+[33mffbb156[m feat: enhance reservation validation to check table capacity and prevent duplicate reservations
+[33m66f88dd[m feat: enhance reservation validation and error handling for duplicate IDs
+[33m5f1e8de[m docs: update json-server link to specific version in README
+[33m2765097[m docs: update README to reflect stable json-server version and remove outdated notes
+[33mb3e101f[m feat: update package name and version to v3.0.0
+[33m89dd074[m feat: enhance validation middleware to support root-relative asset URLs
+[33m7d6112b[m feat: add initial API server setup with JSON server and error handling
