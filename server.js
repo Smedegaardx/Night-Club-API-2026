@@ -75,6 +75,11 @@ app.use("/events", (req, res, next) => {
   next();
 });
 
+app.get("/test-header", (req, res) => {
+  res.setHeader("Content-Type", "text/plain");
+  res.send("API UPDATED");
+});
+
 app.get("/events/:slug", (req, res, next) => {
   if (/^\d+$/.test(req.params.slug)) {
     next();
