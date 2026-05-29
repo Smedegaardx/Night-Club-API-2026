@@ -28,6 +28,22 @@ const middlewares = jsonServer.defaults({
   static: publicDir,
 });
 
+app.use("/file-bucket", (req, res, next) => {
+  if (req.path.endsWith(".jpg") || req.path.endsWith(".jpeg")) {
+    res.setHeader("Content-Type", "image/jpeg");
+  }
+
+  if (req.path.endsWith(".png")) {
+    res.setHeader("Content-Type", "image/png");
+  }
+
+  if (req.path.endsWith(".webp")) {
+    res.setHeader("Content-Type", "image/webp");
+  }
+
+  next();
+});
+
 app.use(middlewares);
 
 app.get("/health", (_req, res) => {
