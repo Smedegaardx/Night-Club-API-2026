@@ -1,4 +1,5 @@
 const path = require("path");
+const express = require("express");
 const jsonServer = require("json-server");
 const sendError = require("./utils/send-error");
 const createValidationMiddleware = require("./middleware/validation");
@@ -25,24 +26,31 @@ function isDuplicateIdError(error) {
 }
 
 const middlewares = jsonServer.defaults({
-  static: publicDir,
+  static: false,
 });
 
-app.use("/file-bucket", (req, res, next) => {
-  if (req.path.endsWith(".jpg") || req.path.endsWith(".jpeg")) {
-    res.setHeader("Content-Type", "image/jpeg");
-  }
+app.use(
+  "/file-bucket",
+  express.static(path.join(publicDir, "file-bucket"), {
+    setHeaders: (res, filePath) => {
+      if (filePath.endsWith(".jpg") || filePath.endsWith(".jpeg")) {
+        res.setHeader("Content-Type", "image/jpeg");
+      }
 
-  if (req.path.endsWith(".png")) {
-    res.setHeader("Content-Type", "image/png");
-  }
+      if (filePath.endsWith(".png")) {
+        res.setHeader("Content-Type", "image/png");
+      }
 
-  if (req.path.endsWith(".webp")) {
-    res.setHeader("Content-Type", "image/webp");
-  }
+      if (filePath.endsWith(".webp")) {
+        res.setHeader("Content-Type", "image/webp");
+      }
 
-  next();
-});
+      if (filePath.endsWith(".svg")) {
+        res.setHeader("Content-Type", "image/svg+xml");
+      }
+    },
+  }),
+);
 
 app.use(middlewares);
 
@@ -52,6 +60,11 @@ app.get("/health", (_req, res) => {
     uptime: Number(process.uptime().toFixed(2)),
     timestamp: new Date().toISOString(),
   });
+});
+
+app.get("/test-header", (_req, res) => {
+  res.setHeader("Content-Type", "text/plain");
+  res.send("API UPDATED");
 });
 
 app.use("/events", (req, res, next) => {
@@ -73,11 +86,6 @@ app.use("/events", (req, res, next) => {
   }
 
   next();
-});
-
-app.get("/test-header", (req, res) => {
-  res.setHeader("Content-Type", "text/plain");
-  res.send("API UPDATED");
 });
 
 app.get("/events/:slug", (req, res, next) => {
@@ -103,6 +111,7 @@ app.get("/events/:slug", (req, res, next) => {
 
 app.use(jsonServer.bodyParser);
 app.use(validationMiddleware);
+
 app.use((req, res, next) => {
   const originalJsonp = res.jsonp.bind(res);
 
@@ -127,6 +136,7 @@ app.use((req, res, next) => {
 
   next();
 });
+
 app.use(router);
 
 app.use((req, res) => {
